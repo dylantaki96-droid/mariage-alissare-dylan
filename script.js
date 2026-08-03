@@ -1,4 +1,4 @@
-const weddingDate = new Date("2027-05-21T15:00:00+02:00");
+const weddingDate = new Date("2027-05-21T14:45:00+02:00");
 
 const daysElement = document.getElementById("days");
 const hoursElement = document.getElementById("hours");
@@ -17,15 +17,24 @@ function updateCountdown() {
     return;
   }
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const dayInMilliseconds = 1000 * 60 * 60 * 24;
+  const hourInMilliseconds = 1000 * 60 * 60;
+  const minuteInMilliseconds = 1000 * 60;
+
+  const days = Math.floor(
+    distance / dayInMilliseconds
+  );
+
   const hours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    (distance % dayInMilliseconds) / hourInMilliseconds
   );
+
   const minutes = Math.floor(
-    (distance % (1000 * 60 * 60)) / (1000 * 60)
+    (distance % hourInMilliseconds) / minuteInMilliseconds
   );
+
   const seconds = Math.floor(
-    (distance % (1000 * 60)) / 1000
+    (distance % minuteInMilliseconds) / 1000
   );
 
   daysElement.textContent = String(days).padStart(3, "0");
@@ -35,24 +44,34 @@ function updateCountdown() {
 }
 
 updateCountdown();
+
 setInterval(updateCountdown, 1000);
 
 const revealElements = document.querySelectorAll(".reveal");
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.15
-  }
-);
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-revealElements.forEach((element) => {
-  revealObserver.observe(element);
-});
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -40px 0px"
+    }
+  );
+
+  revealElements.forEach((element) => {
+    revealObserver.observe(element);
+  });
+} else {
+  revealElements.forEach((element) => {
+    element.classList.add("visible");
+  });
+}
