@@ -1,9 +1,18 @@
-const weddingDate = new Date("2027-05-21T14:45:00+02:00");
+const weddingDate =
+  new Date("2027-05-21T14:45:00+02:00");
 
-const daysElement = document.getElementById("days");
-const hoursElement = document.getElementById("hours");
-const minutesElement = document.getElementById("minutes");
-const secondsElement = document.getElementById("seconds");
+
+const daysElement =
+  document.getElementById("days");
+
+const hoursElement =
+  document.getElementById("hours");
+
+const minutesElement =
+  document.getElementById("minutes");
+
+const secondsElement =
+  document.getElementById("seconds");
 
 
 function updateCountdown() {
@@ -73,71 +82,47 @@ function updateCountdown() {
 
   secondsElement.textContent =
     String(seconds).padStart(2, "0");
-
 }
 
 
 updateCountdown();
 
-setInterval(
-  updateCountdown,
-  1000
-);
+setInterval(updateCountdown, 1000);
 
 
-
-/* APPARITIONS AU SCROLL */
+/* ANIMATIONS AU SCROLL */
 
 const revealElements =
   document.querySelectorAll(".reveal");
 
 
-if ("IntersectionObserver" in window) {
+const observer =
+  new IntersectionObserver(
 
-  const revealObserver =
-    new IntersectionObserver(
+    (entries) => {
 
-      (entries, observer) => {
+      entries.forEach((entry) => {
 
-        entries.forEach((entry) => {
+        if (entry.isIntersecting) {
 
-          if (!entry.isIntersecting) {
-            return;
-          }
+          entry.target.classList.add("visible");
 
-          entry.target
-            .classList
-            .add("visible");
+          observer.unobserve(entry.target);
+        }
 
-          observer
-            .unobserve(entry.target);
+      });
 
-        });
+    },
 
-      },
+    {
+      threshold: 0.15
+    }
 
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -30px 0px"
-      }
-
-    );
+  );
 
 
-  revealElements.forEach((element) => {
+revealElements.forEach((element) => {
 
-    revealObserver.observe(element);
+  observer.observe(element);
 
-  });
-
-}
-
-else {
-
-  revealElements.forEach((element) => {
-
-    element.classList.add("visible");
-
-  });
-
-}
+});
