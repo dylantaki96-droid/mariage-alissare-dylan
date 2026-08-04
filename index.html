@@ -1,500 +1,127 @@
-<!DOCTYPE html>
-<html lang="fr">
+/* COMPTE À REBOURS */
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex,nofollow">
+const weddingDate =
+    new Date("2027-05-21T15:00:00+02:00");
 
-    <title>Alissare & Dylan | 21 mai 2027</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+const daysElement =
+    document.getElementById("days");
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+const hoursElement =
+    document.getElementById("hours");
 
-    <link rel="stylesheet" href="style.css">
-</head>
+const minutesElement =
+    document.getElementById("minutes");
 
-<body>
+const secondsElement =
+    document.getElementById("seconds");
 
-<!-- ACCUEIL -->
 
-<section class="hero" id="accueil">
+function updateCountdown() {
 
-    <div class="hero-content">
+    const now = new Date();
 
-        <h1>Alissare <span>&</span> Dylan</h1>
+    const distance =
+        weddingDate.getTime() - now.getTime();
 
-        <p class="invitation">
-            ont le plaisir de vous convier à leur mariage
-        </p>
 
-        <p class="wedding-date">
-            21 mai 2027
-        </p>
+    if (distance <= 0) {
 
-        <a href="#countdown" class="discover">
-            Découvrir
-        </a>
+        daysElement.textContent = "000";
+        hoursElement.textContent = "00";
+        minutesElement.textContent = "00";
+        secondsElement.textContent = "00";
 
-    </div>
+        return;
+    }
 
-</section>
 
+    const days =
+        Math.floor(
+            distance /
+            (1000 * 60 * 60 * 24)
+        );
 
-<!-- COMPTE À REBOURS -->
 
-<section class="section countdown-section" id="countdown">
+    const hours =
+        Math.floor(
+            (distance %
+            (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
 
-    <p class="section-label">
-        Le grand jour approche
-    </p>
 
-    <h2>Rendez-vous dans</h2>
+    const minutes =
+        Math.floor(
+            (distance %
+            (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
 
-    <div class="countdown">
 
-        <div class="countdown-item">
-            <span id="days">000</span>
-            <small>jours</small>
-        </div>
+    const seconds =
+        Math.floor(
+            (distance %
+            (1000 * 60)) /
+            1000
+        );
 
-        <div class="countdown-item">
-            <span id="hours">00</span>
-            <small>heures</small>
-        </div>
 
-        <div class="countdown-item">
-            <span id="minutes">00</span>
-            <small>minutes</small>
-        </div>
+    daysElement.textContent =
+        String(days).padStart(3, "0");
 
-        <div class="countdown-item">
-            <span id="seconds">00</span>
-            <small>secondes</small>
-        </div>
+    hoursElement.textContent =
+        String(hours).padStart(2, "0");
 
-    </div>
+    minutesElement.textContent =
+        String(minutes).padStart(2, "0");
 
-</section>
+    secondsElement.textContent =
+        String(seconds).padStart(2, "0");
+}
 
 
-<!-- PROGRAMME -->
+updateCountdown();
 
-<section class="section programme-section" id="programme">
+setInterval(updateCountdown, 1000);
 
-    <p class="section-label">
-        Le programme
-    </p>
 
-    <h2>Notre journée</h2>
 
-    <div class="timeline">
+/* FAQ */
 
-        <div class="timeline-item">
+const faqItems =
+    document.querySelectorAll(".faq-item");
 
-            <div class="time">14h45</div>
 
-            <div class="timeline-content">
+faqItems.forEach((item) => {
 
-                <span>Accueil des invités</span>
+    const question =
+        item.querySelector(".faq-question");
 
-                <h3>Mairie de Montrouge</h3>
 
-                <p>
-                    Nous vous attendons à 14h45 afin que la cérémonie
-                    puisse débuter à 15h00.
-                </p>
+    question.addEventListener("click", () => {
 
-            </div>
+        const isOpen =
+            item.classList.contains("active");
 
-        </div>
 
+        /* Ferme les autres questions */
 
-        <div class="timeline-item">
+        faqItems.forEach((otherItem) => {
 
-            <div class="time">15h00</div>
+            otherItem.classList.remove("active");
 
-            <div class="timeline-content">
+        });
 
-                <span>Cérémonie civile</span>
 
-                <h3>Hôtel de Ville</h3>
+        /* Ouvre la question sélectionnée */
 
-                <p>
-                    Nous célébrerons officiellement notre union,
-                    entourés de nos proches.
-                </p>
+        if (!isOpen) {
 
-            </div>
+            item.classList.add("active");
 
-        </div>
+        }
 
+    });
 
-        <div class="timeline-item">
-
-            <div class="time">18h00</div>
-
-            <div class="timeline-content">
-
-                <span>Réception</span>
-
-                <h3>Domaine des Hirondelles</h3>
-
-                <p>
-                    Nous nous retrouverons ensuite au domaine
-                    pour poursuivre les célébrations.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- CITATION -->
-
-<section class="quote-section">
-
-    <div class="quote-content">
-
-        <span>“</span>
-
-        <p>
-            Chaque instant partagé avec vous rendra cette journée
-            encore plus précieuse.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- LIEUX -->
-
-<section class="section places-section" id="lieux">
-
-    <p class="section-label">
-        Les lieux
-    </p>
-
-    <h2>Informations pratiques</h2>
-
-    <div class="places-grid">
-
-        <div class="place">
-
-            <span class="number">01</span>
-
-            <h3>Mairie de Montrouge</h3>
-
-            <p class="place-time">
-                Arrivée à 14h45
-            </p>
-
-            <p>
-                43 avenue de la République<br>
-                92120 Montrouge
-            </p>
-
-            <a
-                href="https://www.google.com/maps/search/?api=1&query=43+avenue+de+la+Republique+92120+Montrouge"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Voir l’itinéraire →
-            </a>
-
-        </div>
-
-
-        <div class="place">
-
-            <span class="number">02</span>
-
-            <h3>Domaine des Hirondelles</h3>
-
-            <p class="place-time">
-                À partir de 18h00
-            </p>
-
-            <p>
-                1 route de Rochefort<br>
-                78730 Longvilliers
-            </p>
-
-            <a
-                href="https://www.google.com/maps/search/?api=1&query=1+route+de+Rochefort+78730+Longvilliers"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Voir l’itinéraire →
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FAQ -->
-
-<section class="section faq-section" id="faq">
-
-    <p class="section-label">
-        Quelques précisions
-    </p>
-
-    <h2>Foire aux questions</h2>
-
-    <div class="faq-container">
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Est-ce que je peux amener mes enfants au mariage ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Pour que vous puissiez profiter pleinement de la soirée,
-                        nous avons imaginé cette célébration comme un moment entre adultes.
-                        Le lieu étant par ailleurs peu adapté aux plus petits,
-                        nous vous remercions de prévoir de faire garder vos bouts de chou
-                        pour l’occasion. 🤍
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Est-ce que je peux inviter un +1 ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Les personnes conviées sont précisées sur votre invitation.
-                        N’hésitez pas à la consulter pour vérifier !
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>À quelle heure dois-je arriver ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Pour la cérémonie à la mairie, nous vous attendons à
-                        <strong>14h45</strong>.
-                        Pour la réception, rendez-vous au domaine à partir de
-                        <strong>18h00</strong>.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Quel est le code vestimentaire ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Une tenue élégante est de mise :
-                        <strong>tenue de soirée et/ou tenue traditionnelle</strong>.
-                        Sortez vos plus belles tenues !
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Est-ce que je peux porter du blanc ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Il n’y a pas d’interdiction particulière concernant le blanc.
-                        La mariée compte néanmoins porter une robe blanche.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Est-ce que je peux prendre des photos ou des vidéos pendant l’événement ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Un photographe sera présent pour immortaliser les moments forts,
-                        mais vous pouvez également prendre vos propres photos et vidéos
-                        tout au long de la soirée.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>L’endroit est-il accessible aux personnes à mobilité réduite ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Oui. Le Domaine des Hirondelles ainsi que la Mairie de Montrouge
-                        disposent d’accès adaptés aux personnes à mobilité réduite.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Est-ce que je peux apporter un cadeau ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Votre présence est déjà le plus beau des cadeaux.
-                        Si vous souhaitez néanmoins nous témoigner une attention supplémentaire,
-                        une urne sera mise à disposition pour contribuer à nos futurs projets
-                        à deux. 🤍
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Où puis-je me stationner ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Un espace de stationnement est disponible au Domaine des Hirondelles.
-                        Pour la mairie, un parking public Indigo se trouve à proximité.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>La réception se déroulera-t-elle à l’intérieur ou à l’extérieur ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Le cocktail se déroulera en extérieur, avant de poursuivre
-                        à l’intérieur pour le dîner et la soirée.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <button class="faq-question">
-                <span>Y aura-t-il une cérémonie religieuse ?</span>
-                <span class="faq-icon">+</span>
-            </button>
-
-            <div class="faq-answer">
-                <div>
-                    <p>
-                        Non, aucune cérémonie religieuse n’est prévue ce jour-là,
-                        mais plusieurs traditions viendront rythmer les célébrations
-                        tout au long de la soirée.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- FIN -->
-
-<footer class="footer">
-
-    <p>
-        Nous avons hâte de partager cette journée avec vous.
-    </p>
-
-    <h2>Alissare & Dylan</h2>
-
-    <span>21 · 05 · 2027</span>
-
-</footer>
-
-
-<script src="script.js"></script>
-
-</body>
-</html>
+});
