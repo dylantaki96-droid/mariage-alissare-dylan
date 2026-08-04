@@ -52,7 +52,7 @@ img {
       rgba(0,0,0,.35),
       rgba(0,0,0,.35)
     ),
-    url("photo2.jpg.jpg");
+    url("photo3.jpg.jpg");
 
   background-size: cover;
   background-position: center;
@@ -299,7 +299,7 @@ img {
 }
 
 
-/* PHOTO 2 */
+/* PHOTO INTERMEDIAIRE */
 
 .photo-break {
   position: relative;
@@ -381,58 +381,6 @@ img {
   font-size: clamp(2rem, 4vw, 3.3rem);
 
   font-weight: 300;
-
-  line-height: 1.2;
-}
-
-
-/* PHOTO 3 */
-
-.editorial-section {
-  padding: 100px 8%;
-
-  background: var(--cream);
-}
-
-.editorial-inner {
-  max-width: 1050px;
-
-  margin: auto;
-
-  display: grid;
-
-  grid-template-columns: 1fr .75fr;
-
-  gap: 80px;
-
-  align-items: center;
-}
-
-.editorial-photo img {
-  width: 100%;
-  height: auto;
-
-  max-height: 600px;
-
-  object-fit: contain;
-}
-
-.editorial-text span {
-  color: var(--green);
-
-  font-size: .7rem;
-
-  letter-spacing: .25em;
-}
-
-.editorial-text p {
-  margin-top: 25px;
-
-  font-family: "Cormorant Garamond", serif;
-
-  font-size: clamp(2rem, 4vw, 3rem);
-
-  font-style: italic;
 
   line-height: 1.2;
 }
@@ -618,7 +566,7 @@ img {
 }
 
 
-/* PHOTO 4 / FIN */
+/* PHOTO DE FIN */
 
 .closing-photo {
   position: relative;
@@ -702,6 +650,12 @@ img {
     padding: 80px 24px;
   }
 
+  .hero {
+    min-height: 100svh;
+
+    background-position: center;
+  }
+
   .hero h1 {
     font-size: 4.5rem;
   }
@@ -736,12 +690,6 @@ img {
 
   .photo-break {
     min-height: 55vh;
-  }
-
-  .editorial-inner {
-    grid-template-columns: 1fr;
-
-    gap: 45px;
   }
 
   .places-grid {
