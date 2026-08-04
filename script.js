@@ -1,87 +1,83 @@
+/* COMPTE À REBOURS */
+
 const weddingDate =
-  new Date("2027-05-21T14:45:00+02:00");
+    new Date("2027-05-21T15:00:00+02:00");
 
 
 const daysElement =
-  document.getElementById("days");
+    document.getElementById("days");
 
 const hoursElement =
-  document.getElementById("hours");
+    document.getElementById("hours");
 
 const minutesElement =
-  document.getElementById("minutes");
+    document.getElementById("minutes");
 
 const secondsElement =
-  document.getElementById("seconds");
+    document.getElementById("seconds");
 
 
 function updateCountdown() {
 
-  const now = new Date();
+    const now = new Date();
 
-  const distance =
-    weddingDate.getTime() - now.getTime();
-
-
-  if (distance <= 0) {
-
-    daysElement.textContent = "000";
-    hoursElement.textContent = "00";
-    minutesElement.textContent = "00";
-    secondsElement.textContent = "00";
-
-    return;
-  }
+    const distance =
+        weddingDate.getTime() - now.getTime();
 
 
-  const days =
-    Math.floor(
-      distance /
-      (1000 * 60 * 60 * 24)
-    );
+    if (distance <= 0) {
+
+        daysElement.textContent = "000";
+        hoursElement.textContent = "00";
+        minutesElement.textContent = "00";
+        secondsElement.textContent = "00";
+
+        return;
+    }
 
 
-  const hours =
-    Math.floor(
-      (
-        distance %
-        (1000 * 60 * 60 * 24)
-      ) /
-      (1000 * 60 * 60)
-    );
+    const days =
+        Math.floor(
+            distance /
+            (1000 * 60 * 60 * 24)
+        );
 
 
-  const minutes =
-    Math.floor(
-      (
-        distance %
-        (1000 * 60 * 60)
-      ) /
-      (1000 * 60)
-    );
+    const hours =
+        Math.floor(
+            (distance %
+            (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
 
 
-  const seconds =
-    Math.floor(
-      (
-        distance %
-        (1000 * 60)
-      ) /
-      1000
-    );
+    const minutes =
+        Math.floor(
+            (distance %
+            (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
 
 
-  daysElement.textContent =
-    String(days).padStart(3, "0");
+    const seconds =
+        Math.floor(
+            (distance %
+            (1000 * 60)) /
+            1000
+        );
 
-  hoursElement.textContent =
-    String(hours).padStart(2, "0");
 
-  minutesElement.textContent =
-    String(minutes).padStart(2, "0");
+    daysElement.textContent =
+        String(days).padStart(3, "0");
 
-  secondsElement.textContent =
-    String(seconds).padStart(2, "0");
+    hoursElement.textContent =
+        String(hours).padStart(2, "0");
+
+    minutesElement.textContent =
+        String(minutes).padStart(2, "0");
+
+    secondsElement.textContent =
+        String(seconds).padStart(2, "0");
 }
 
 
@@ -90,39 +86,42 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 
-/* ANIMATIONS AU SCROLL */
 
-const revealElements =
-  document.querySelectorAll(".reveal");
+/* FAQ */
+
+const faqItems =
+    document.querySelectorAll(".faq-item");
 
 
-const observer =
-  new IntersectionObserver(
+faqItems.forEach((item) => {
 
-    (entries) => {
+    const question =
+        item.querySelector(".faq-question");
 
-      entries.forEach((entry) => {
 
-        if (entry.isIntersecting) {
+    question.addEventListener("click", () => {
 
-          entry.target.classList.add("visible");
+        const isOpen =
+            item.classList.contains("active");
 
-          observer.unobserve(entry.target);
+
+        /* Ferme les autres questions */
+
+        faqItems.forEach((otherItem) => {
+
+            otherItem.classList.remove("active");
+
+        });
+
+
+        /* Ouvre la question sélectionnée */
+
+        if (!isOpen) {
+
+            item.classList.add("active");
+
         }
 
-      });
-
-    },
-
-    {
-      threshold: 0.15
-    }
-
-  );
-
-
-revealElements.forEach((element) => {
-
-  observer.observe(element);
+    });
 
 });
