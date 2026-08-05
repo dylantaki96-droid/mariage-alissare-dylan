@@ -152,6 +152,52 @@ img {
 }
 
 
+/* TITRES STICKY */
+
+.countdown-section > h2,
+.programme-section > h2,
+.places-section > h2,
+.faq-section > h2 {
+  position: sticky;
+  top: 0;
+
+  z-index: 30;
+
+  padding-top: 18px;
+  padding-bottom: 18px;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-bottom: 1px solid var(--line);
+}
+
+
+/* Fond adapté à chaque section */
+
+.countdown-section > h2,
+.faq-section > h2 {
+  background: rgba(252, 250, 247, 0.96);
+
+  box-shadow:
+    100vmax 0 0 rgba(252, 250, 247, 0.96),
+    -100vmax 0 0 rgba(252, 250, 247, 0.96);
+
+  clip-path: inset(0 -100vmax);
+}
+
+.programme-section > h2,
+.places-section > h2 {
+  background: rgba(248, 245, 240, 0.96);
+
+  box-shadow:
+    100vmax 0 0 rgba(248, 245, 240, 0.96),
+    -100vmax 0 0 rgba(248, 245, 240, 0.96);
+
+  clip-path: inset(0 -100vmax);
+}
+
+
 /* COUNTDOWN */
 
 .countdown-section {
@@ -576,5 +622,18 @@ img {
 
   .closing-photo {
     min-height: 65vh;
+  }
+
+
+  /* Sticky plus compact sur téléphone */
+
+  .countdown-section > h2,
+  .programme-section > h2,
+  .places-section > h2,
+  .faq-section > h2 {
+    padding-top: 13px;
+    padding-bottom: 13px;
+
+    font-size: clamp(2.1rem, 11vw, 3rem);
   }
 }
