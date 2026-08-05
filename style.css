@@ -152,7 +152,7 @@ img {
 }
 
 
-/* TITRES STICKY */
+/* GRANDS TITRES STICKY */
 
 .countdown-section > h2,
 .programme-section > h2,
@@ -163,8 +163,16 @@ img {
 
   z-index: 30;
 
-  padding-top: 18px;
-  padding-bottom: 18px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -0.025em;
+
+  color: var(--green-dark);
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -173,26 +181,45 @@ img {
 }
 
 
-/* Fond adapté à chaque section */
+/* Ligne élégante sous les titres */
+
+.countdown-section > h2::after,
+.programme-section > h2::after,
+.places-section > h2::after,
+.faq-section > h2::after {
+  content: "";
+
+  display: block;
+
+  width: 54px;
+  height: 1px;
+
+  margin: 14px auto 0;
+
+  background: var(--green);
+}
+
+
+/* Fond sticky selon les sections */
 
 .countdown-section > h2,
 .faq-section > h2 {
-  background: rgba(252, 250, 247, 0.96);
+  background: rgba(252, 250, 247, 0.97);
 
   box-shadow:
-    100vmax 0 0 rgba(252, 250, 247, 0.96),
-    -100vmax 0 0 rgba(252, 250, 247, 0.96);
+    100vmax 0 0 rgba(252, 250, 247, 0.97),
+    -100vmax 0 0 rgba(252, 250, 247, 0.97);
 
   clip-path: inset(0 -100vmax);
 }
 
 .programme-section > h2,
 .places-section > h2 {
-  background: rgba(248, 245, 240, 0.96);
+  background: rgba(248, 245, 240, 0.97);
 
   box-shadow:
-    100vmax 0 0 rgba(248, 245, 240, 0.96),
-    -100vmax 0 0 rgba(248, 245, 240, 0.96);
+    100vmax 0 0 rgba(248, 245, 240, 0.97),
+    -100vmax 0 0 rgba(248, 245, 240, 0.97);
 
   clip-path: inset(0 -100vmax);
 }
@@ -570,6 +597,31 @@ img {
     max-height: none;
   }
 
+
+  /* TITRES STICKY MOBILE */
+
+  .countdown-section > h2,
+  .programme-section > h2,
+  .places-section > h2,
+  .faq-section > h2 {
+    padding-top: 14px;
+    padding-bottom: 14px;
+
+    font-size: clamp(2.5rem, 12vw, 3.4rem);
+    line-height: .95;
+  }
+
+  .countdown-section > h2::after,
+  .programme-section > h2::after,
+  .places-section > h2::after,
+  .faq-section > h2::after {
+    width: 40px;
+    margin-top: 10px;
+  }
+
+
+  /* COUNTDOWN MOBILE */
+
   .countdown {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -582,15 +634,24 @@ img {
     border-bottom: 1px solid var(--line);
   }
 
+
+  /* PROGRAMME MOBILE */
+
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 5px;
     padding-bottom: 45px;
   }
 
+
+  /* PHOTO MOBILE */
+
   .photo-break {
     min-height: 55vh;
   }
+
+
+  /* LIEUX MOBILE */
 
   .places-grid {
     grid-template-columns: 1fr;
@@ -601,6 +662,9 @@ img {
     padding-left: 0;
     padding-right: 0;
   }
+
+
+  /* FAQ MOBILE */
 
   .faq-container {
     margin-top: 50px;
@@ -620,20 +684,10 @@ img {
     padding-bottom: 24px;
   }
 
+
+  /* FIN MOBILE */
+
   .closing-photo {
     min-height: 65vh;
-  }
-
-
-  /* Sticky plus compact sur téléphone */
-
-  .countdown-section > h2,
-  .programme-section > h2,
-  .places-section > h2,
-  .faq-section > h2 {
-    padding-top: 13px;
-    padding-bottom: 13px;
-
-    font-size: clamp(2.1rem, 11vw, 3rem);
   }
 }
